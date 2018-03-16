@@ -25,6 +25,7 @@ body{
 
 .gif{
     margin: 20px;
+    border: solid medium black;
 }
 
 p{
