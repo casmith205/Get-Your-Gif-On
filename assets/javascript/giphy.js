@@ -84,8 +84,8 @@ $(document).ready(function() {
         // Creating and storing an image tag
         var animalImage = $('<img class="gif">');
         // Setting the src attribute of the image to a property pulled off the result item
-        animalImage.attr("src", response.data[i].images.fixed_height_still.url);
-        animalImage.attr("still", response.data[i].images.fixed_height_still.url);
+        animalImage.attr("src", response.data[i].images.fixed_width_still.url);
+        animalImage.attr("still", response.data[i].images.fixed_width_still.url);
         animalImage.attr("gif", response.data[i].images.fixed_height.url);
         animalImage.attr("data-state", "still");
         // Push to HTML
