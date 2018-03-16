@@ -1,18 +1,16 @@
 // Instructions
-// Before you can make any part of our site work, you need to create an array of strings, each one related to a topic that interests you. Save it to a variable called topics.
-// Your app should take the topics in this array and create buttons in your HTML.
-// Try using a loop that appends a button for each string in the array.
+// (x) Before you can make any part of our site work, you need to create an array of strings, each one related to a topic that interests you. Save it to a variable called topics.
+// (x) Your app should take the topics in this array and create buttons in your HTML.
+// (x) Try using a loop that appends a button for each string in the array.
 
-// When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
+// (NEEDS TO BE STATIC) When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
 // When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
-// Under every gif, display its rating (PG, G, so on).
+// (x) Under every gif, display its rating (PG, G, so on).
 
-
-// This data is provided by the GIPHY API.
 // Only once you get images displaying with button presses should you move on to the next step.
 
-
-// Add a form to your page takes the value from a user input box and adds it into your topics array. Then make a function call that takes each topic in the array remakes the buttons on the page.
+// (x) Add a form to your page takes the value from a user input box and adds it into your topics array. 
+// (x) Then make a function call that takes each topic in the array remakes the buttons on the page.
 
 
 $(document).ready(function() {
@@ -47,6 +45,8 @@ $(document).ready(function() {
         $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
       }
+    });
+
     
 // DEFINING FUNCTIONS
   // Function for displaying animal buttons
@@ -72,7 +72,22 @@ $(document).ready(function() {
       url: queryURL,
       method: "GET"
     }).then(function(response) {
-      console.log(response);
+    console.log(response);
+    // Creating a for loop to run through the images in the array
+      for(i=0; i<response.data.length; i++) {
+        // Creating and storing a div tag
+        var animalDiv = $("<div id='gif'></div>");
+        // Creating a paragraph tag with the gif rating
+        var rating = $("<p>").text("Rating: " + response.data[i].rating);
+        // Creating and storing an image tag
+        var animalImage = $("<img>");
+        // Setting the src attribute of the image to a property pulled off the result item
+        animalImage.attr("src", response.data[i].images.fixed_height_still.url);
+        // Push to HTML
+        $(animalDiv).append(animalImage);
+        $(animalDiv).append(rating);
+        $(".gifs").prepend(animalDiv);
+      };
     });
   };
 
