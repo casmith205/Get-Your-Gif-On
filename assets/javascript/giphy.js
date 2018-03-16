@@ -49,6 +49,16 @@ $(document).ready(function() {
       }
     });
 
+// On-click of the favorite button
+$("body").on("click", ".fav", function() {
+    console.log(this);
+    // How do I move the whole image to favorites
+    $(this)
+      .closest("div")
+      .appendTo($(".favorites"));
+    $(this).fadeOut();
+});
+
     
 // DEFINING FUNCTIONS
   // Function for displaying animal buttons
@@ -78,9 +88,12 @@ $(document).ready(function() {
     // Creating a for loop to run through the images in the array
       for(i=0; i<response.data.length; i++) {
         // Creating and storing a div tag
-        var animalDiv = $("<div>");
+        var animalDiv = $("<div class='animalDiv'>");
         // Creating a paragraph tag with the gif rating
         var rating = $("<p>").text("Rating: " + response.data[i].rating);
+        // Creating an "add to favorites" button
+        var favBtn = $("<button class='fav'>");
+        favBtn.text("Add to Favorites");
         // Creating and storing an image tag
         var animalImage = $('<img class="gif">');
         // Setting the src attribute of the image to a property pulled off the result item
@@ -91,6 +104,7 @@ $(document).ready(function() {
         // Push to HTML
         $(animalDiv).append(animalImage);
         $(animalDiv).append(rating);
+        $(animalDiv).append(favBtn);
         $(".gifs").prepend(animalDiv);
       };
     });
