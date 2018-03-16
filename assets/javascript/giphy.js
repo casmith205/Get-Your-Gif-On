@@ -17,11 +17,12 @@
 
 $(document).ready(function() {
 
+//SETTING GLOBAL VARIABLES
     var topics = ["dog", "cat", "penguin", "bear"];
-
     var apiKey = "gBMwoy1kuUu2WyiV4tlNZ0Lr9zXGz6Hz"
     var queryURL = "https://api.giphy.com/v1/gifs/search?q="+"bear"+"&limit=10&api_key=" + apiKey;
 
+// ON-PAGE EVENTS
   // On the click of the search animal button...
     $("#add-animal").on("click", function(){
       event.preventDefault();
@@ -41,24 +42,24 @@ $(document).ready(function() {
     });
 
     
-    
-     // Function for displaying animal buttons
-     function renderButtons() {
-      // Deletes the animals prior to adding new animals
-      $(".buttons").empty();
-      // loops through the array and adds the button and appends to the button section
-       for (var i = 0; i < topics.length; i++) {
-          var btn = $("<button>");
-          btn.addClass("animal");
-          btn.attr("data-name", topics[i]);
-          btn.text(topics[i]);
-          $(".buttons").append(btn);
-       }
-     }
+// DEFINING FUNCTIONS
+  // Function for displaying animal buttons
+  function renderButtons() {
+  // Deletes the animals prior to adding new animals
+  $(".buttons").empty();
+  // loops through the array and adds the button and appends to the button section
+    for (var i = 0; i < topics.length; i++) {
+      var btn = $("<button>");
+      btn.addClass("animal");
+      btn.attr("data-name", topics[i]);
+      btn.text(topics[i]);
+      $(".buttons").append(btn);
+    }
+  };
 
-     // Adding click event listeners to all elements with a class of "animal"
-     $(document).on("click", ".animal", displayMovieInfo);
+  // Adding click event listeners to all elements with a class of "animal"
+  $(document).on("click", ".animal", displayMovieInfo);
 
-     // Calling the renderButtons function to display the intial buttons
-     renderButtons();
+  // Calling the renderButtons function to display the intial buttons
+  renderButtons();
 });
