@@ -22,11 +22,11 @@ $(document).ready(function() {
     var apiKey = "gBMwoy1kuUu2WyiV4tlNZ0Lr9zXGz6Hz"
     var queryURL = "https://api.giphy.com/v1/gifs/search?q="+"bear"+"&limit=10&api_key=" + apiKey;
 
+  // On the click of the search animal button...
     $("#add-animal").on("click", function(){
       event.preventDefault();
       // This line will grab the text from the input box
       var animal = $("#search-input").val().trim();
-      // The movie from the textbox is then added to our array
       topics.push(animal);
       console.log(topics);
       renderButtons();
