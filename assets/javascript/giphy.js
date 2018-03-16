@@ -4,7 +4,7 @@
 // (x) Try using a loop that appends a button for each string in the array.
 
 // (x) When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
-// (STUCK ON THIS)When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
+// (x)When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
 // (x) Under every gif, display its rating (PG, G, so on).
 
 // Only once you get images displaying with button presses should you move on to the next step.
@@ -16,7 +16,7 @@
 $(document).ready(function() {
 
 //SETTING GLOBAL VARIABLES
-    var topics = ["dog", "cat", "penguin", "bear"];
+    var topics = ["dog", "cat", "seal", "bear"];
     var apiKey = "gBMwoy1kuUu2WyiV4tlNZ0Lr9zXGz6Hz"
     
 
@@ -42,9 +42,10 @@ $(document).ready(function() {
       if (state === "still") {
         console.log(this);
         $(this).attr("data-state", "animate");
-        // HOW DO I CHANGE THE URL TO ANIMATE
+        $(this).attr("src", $(this).attr("gif"))
       } else {
         $(this).attr("data-state", "still");
+        $(this).attr("src", $(this).attr("still"))
       }
     });
 
@@ -84,6 +85,8 @@ $(document).ready(function() {
         var animalImage = $('<img class="gif">');
         // Setting the src attribute of the image to a property pulled off the result item
         animalImage.attr("src", response.data[i].images.fixed_height_still.url);
+        animalImage.attr("still", response.data[i].images.fixed_height_still.url);
+        animalImage.attr("gif", response.data[i].images.fixed_height.url);
         animalImage.attr("data-state", "still");
         // Push to HTML
         $(animalDiv).append(animalImage);
