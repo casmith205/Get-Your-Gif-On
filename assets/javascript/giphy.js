@@ -16,7 +16,7 @@
 $(document).ready(function() {
 
 //SETTING GLOBAL VARIABLES
-    var topics = ["dog", "cat", "seal", "bear"];
+    var topics = ["zebra", "monkey", "giraffe", "bear"];
     var apiKey = "gBMwoy1kuUu2WyiV4tlNZ0Lr9zXGz6Hz"
     
 
@@ -97,8 +97,8 @@ $("body").on("click", ".fav", function() {
         // Creating and storing an image tag
         var animalImage = $('<img class="gif">');
         // Setting the src attribute of the image to a property pulled off the result item
-        animalImage.attr("src", response.data[i].images.fixed_width_still.url);
-        animalImage.attr("still", response.data[i].images.fixed_width_still.url);
+        animalImage.attr("src", response.data[i].images.fixed_height_still.url);
+        animalImage.attr("still", response.data[i].images.fixed_height_still.url);
         animalImage.attr("gif", response.data[i].images.fixed_height.url);
         animalImage.attr("data-state", "still");
         // Push to HTML
