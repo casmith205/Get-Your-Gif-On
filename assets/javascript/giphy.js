@@ -20,7 +20,7 @@ $(document).ready(function() {
 //SETTING GLOBAL VARIABLES
     var topics = ["dog", "cat", "penguin", "bear"];
     var apiKey = "gBMwoy1kuUu2WyiV4tlNZ0Lr9zXGz6Hz"
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+"bear"+"&limit=10&api_key=" + apiKey;
+    
 
 // ON-PAGE EVENTS
   // On the click of the search animal button...
@@ -33,14 +33,20 @@ $(document).ready(function() {
       renderButtons();
     });
 
-
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    }).then(function(response) {
-      console.log(response);
-    });
-
+// On-click of the gifs 
+    $(".gif").on("click", function() {
+      // Getting the data state of the gif on click
+      var state = $(this).attr("data-state");
+      // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+      // Then, set the image's data-state to animate
+      // Else set src to the data-still value
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      }
     
 // DEFINING FUNCTIONS
   // Function for displaying animal buttons
@@ -57,8 +63,21 @@ $(document).ready(function() {
     }
   };
 
+  // Function for displaying gifs
+  function displayGif (){
+    var animal = $(this).attr("data-name");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+animal+"&limit=10&api_key=" + apiKey;
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+    });
+  };
+
   // Adding click event listeners to all elements with a class of "animal"
-  $(document).on("click", ".animal", displayMovieInfo);
+  $(document).on("click", ".animal", displayGif);
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
