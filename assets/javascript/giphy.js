@@ -3,8 +3,8 @@
 // (x) Your app should take the topics in this array and create buttons in your HTML.
 // (x) Try using a loop that appends a button for each string in the array.
 
-// (NEEDS TO BE STATIC) When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
-// When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
+// (x) When the user clicks on a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.
+// (STUCK ON THIS)When the user clicks one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
 // (x) Under every gif, display its rating (PG, G, so on).
 
 // Only once you get images displaying with button presses should you move on to the next step.
@@ -32,17 +32,18 @@ $(document).ready(function() {
     });
 
 // On-click of the gifs 
-    $(".gif").on("click", function() {
+    $("body").on("click", ".gif", function() {
       // Getting the data state of the gif on click
       var state = $(this).attr("data-state");
+      console.log(state);
       // If the clicked image's state is still, update its src attribute to what its data-animate value is.
       // Then, set the image's data-state to animate
       // Else set src to the data-still value
       if (state === "still") {
-        $(this).attr("src", $(this).attr("data-animate"));
+        console.log(this);
         $(this).attr("data-state", "animate");
+        // HOW DO I CHANGE THE URL TO ANIMATE
       } else {
-        $(this).attr("src", $(this).attr("data-still"));
         $(this).attr("data-state", "still");
       }
     });
@@ -76,13 +77,14 @@ $(document).ready(function() {
     // Creating a for loop to run through the images in the array
       for(i=0; i<response.data.length; i++) {
         // Creating and storing a div tag
-        var animalDiv = $("<div id='gif'></div>");
+        var animalDiv = $("<div>");
         // Creating a paragraph tag with the gif rating
         var rating = $("<p>").text("Rating: " + response.data[i].rating);
         // Creating and storing an image tag
-        var animalImage = $("<img>");
+        var animalImage = $('<img class="gif">');
         // Setting the src attribute of the image to a property pulled off the result item
         animalImage.attr("src", response.data[i].images.fixed_height_still.url);
+        animalImage.attr("data-state", "still");
         // Push to HTML
         $(animalDiv).append(animalImage);
         $(animalDiv).append(rating);
